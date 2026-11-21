@@ -1,0 +1,101 @@
+@page {
+  size: A4;
+  margin: 21mm 18mm 22mm 18mm;
+  @top-left { content: "ZYNQ ZERO MicroPython Architecture"; font: 600 7.6pt Inter; color: #6b6b6b; vertical-align: bottom; padding-bottom: 3mm; }
+  @top-right { content: string(chapter); font: 7.6pt Inter; color: #6b6b6b; vertical-align: bottom; padding-bottom: 3mm; }
+  @bottom-left { content: string(section); font: 7.6pt Inter; color: #6b6b6b; vertical-align: top; padding-top: 4mm; }
+  @bottom-right { content: counter(page); font: 600 7.6pt Inter; color: #333; vertical-align: top; padding-top: 4mm; }
+}
+@page cover { margin: 0; @top-left { content: none } @top-right { content: none } @bottom-left { content: none } @bottom-right { content: none } }
+@page front { @top-right { content: none } }
+
+html { font-family: Inter, sans-serif; font-size: 9.2pt; line-height: 1.48; color: #232323; }
+body { margin: 0; }
+a { color: #c51a4a; text-decoration: none; }
+b, strong { font-weight: 600; }
+code { font-family: "DejaVu Sans Mono", monospace; font-size: 0.86em; color: #3a3a3a; }
+
+/* ---- Cover ----------------------------------------------------------------- */
+.cover { page: cover; height: 297mm; position: relative; overflow: hidden; }
+.cover .mark { position: absolute; left: 18mm; top: 16mm; display: flex; align-items: center; }
+.cover .mark .name { font: 600 10.5pt Inter; margin-left: 3mm; color: #232323; letter-spacing: 0.02em; }
+.cover .art { position: absolute; left: 0; top: 52mm; width: 210mm; }
+.cover .title { position: absolute; left: 18mm; top: 190mm; font: 700 34pt/1.08 Inter; color: #1d1d1d; letter-spacing: -0.01em; }
+.cover .subtitle { position: absolute; left: 18mm; top: 239mm; font: 400 13pt Inter; color: #555; }
+.cover .rule { position: absolute; left: 18mm; top: 233mm; width: 26mm; height: 1.6mm; background: #c51a4a; }
+.cover .foot { position: absolute; left: 18mm; bottom: 15mm; font: 7.8pt Inter; color: #777; }
+
+/* ---- Front matter ------------------------------------------------------------ */
+.front { page: front; }
+.front-title { font: 700 20pt Inter; margin: 0 0 6mm; string-set: section content(), chapter ""; }
+.colophon p { margin: 0 0 2.4mm; }
+.colophon .meta { font-family: "DejaVu Sans Mono"; font-size: 8pt; color: #444; margin-top: 5mm; }
+
+.toc { list-style: none; padding: 0; margin: 0; }
+.toc li { margin: 0; }
+.toc li a { color: #232323; display: block; }
+.toc li a::after { content: leader(". ") target-counter(attr(href), page); color: #444; }
+.toc li.c { font-weight: 600; margin-top: 2.6mm; font-size: 9.4pt; }
+.toc li.s { padding-left: 6mm; font-size: 8.6pt; }
+.toc li.ss { padding-left: 13mm; font-size: 8.2pt; color: #444; }
+
+/* ---- Headings ------------------------------------------------------------------ */
+h1 { break-before: page; font: 700 21pt/1.2 Inter; margin: 0 0 7mm; color: #1d1d1d;
+     string-set: chapter content(), section content(); }
+h2 { font: 700 13.5pt/1.25 Inter; margin: 7mm 0 2.6mm; color: #1d1d1d; string-set: section content();
+     break-after: avoid; }
+h3 { font: 700 10.8pt/1.3 Inter; margin: 5mm 0 2mm; color: #1d1d1d; break-after: avoid; }
+h4 { font: 700 9.4pt/1.3 Inter; margin: 4mm 0 1.6mm; color: #1d1d1d; break-after: avoid; }
+h1 + h2 { margin-top: 0; }
+
+p { margin: 0 0 2.3mm; text-align: left; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 2.6mm; padding-left: 5mm; }
+ul { list-style: none; }
+ul > li { position: relative; margin: 0 0 0.8mm; }
+ul > li::before { content: "•"; position: absolute; left: -4mm; color: #232323; }
+ul ul { margin: 0.8mm 0 0.8mm; }
+ul ul > li::before { content: "◦"; }
+ol > li { margin: 0 0 0.8mm; }
+
+/* ---- Captioned blocks: caption in the left column ------------------------------- */
+.blk { margin: 3.6mm 0 4.2mm; }
+.blk::after { content: ""; display: block; clear: both; }
+.blk > .cap { float: left; width: 29mm; font-size: 7.9pt; line-height: 1.35; color: #555; padding-top: 0.6mm; }
+.blk > .cap b { color: #232323; display: block; }
+.blk > .body { margin-left: 33mm; }
+.fig { break-inside: avoid; }
+.fig > .body { border-top: 0.5pt solid #d4d4d4; border-bottom: 0.5pt solid #d4d4d4; padding: 2.4mm 0; }
+.fig svg { display: block; }
+
+table { width: 100%; border-collapse: collapse; font-size: 8.1pt; line-height: 1.35; }
+thead th { background: #e8e8e8; font-weight: 600; text-align: left; padding: 1.3mm 1.6mm; border-bottom: 0.6pt solid #9a9a9a; vertical-align: bottom; }
+tbody td { padding: 1.15mm 1.6mm; border-bottom: 0.4pt solid #cfcfcf; vertical-align: top; }
+tbody tr:nth-child(even) td { background: #f7f7f7; }
+td.mono, th.mono { font-family: "DejaVu Sans Mono"; font-size: 7.5pt; white-space: nowrap; }
+td code { font-size: 7.4pt; }
+tr { break-inside: avoid; }
+.tbl.small table { font-size: 7.6pt; }
+
+/* ---- Admonitions -------------------------------------------------------------------- */
+.adm { break-inside: avoid; }
+.adm > .cap { color: #232323; }
+.adm .lbl { display: flex; align-items: center; font: 700 7.9pt Inter; letter-spacing: 0.06em; }
+.adm .lbl svg { width: 4.2mm; height: 4.2mm; margin-right: 1.6mm; }
+.adm > .body { border-left: 1.1pt solid #c51a4a; padding: 0.4mm 0 0.4mm 3mm; }
+.adm > .body p:last-child { margin-bottom: 0; }
+.adm.important > .body { border-left-color: #e08a00; }
+
+/* ---- Listings ------------------------------------------------------------------------- */
+.listing { margin: 3.4mm 0 4.2mm; break-inside: avoid; }
+.listing .src { font-size: 7.8pt; color: #555; margin-bottom: 1mm; }
+.listing pre { margin: 0; background: #f3f3f3; border-left: 1.1pt solid #c9c9c9; padding: 2mm 2.6mm;
+               font: 7.4pt/1.42 "DejaVu Sans Mono"; color: #2a2a2a; white-space: pre; }
+.listing .ln { color: #9a9a9a; display: inline-block; width: 6mm; text-align: right; margin-right: 3mm; }
+.listing .cm { color: #6a7f6a; }
+.listing .kw { color: #8a2251; }
+
+.lead { font-size: 10pt; color: #333; }
+.pagebreak { break-before: page; }
+.nobreak { break-inside: avoid; }
+.keep { break-inside: avoid; }
+.blk.tbl { break-inside: avoid; }

@@ -1,0 +1,7 @@
+/micropython/
+/hw/build/
+/ports/zynq/build/
+/ports/zynq/build-qemu/
+/usermods/lv_binding_micropython/
+/ports/zynq/lextab.py
+/ports/zynq/yacctab.py
